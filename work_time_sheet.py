@@ -6,6 +6,7 @@ import re
 import sys
 
 MY_MANE = '出口雅也'
+STANDARD_WORK_TIME = '08:00'
 
 
 def work_time_sheet(input_file):
@@ -73,8 +74,12 @@ def working_time(s1: str, s2: str) -> str:
 
 def overtime_work(s: str) -> str:
     t = datetime.datetime.strptime(s, '%H:%M')
+    td = t - datetime.datetime.strptime(STANDARD_WORK_TIME, '%H:%M')
 
-    return td_to_str(t - datetime.datetime.strptime('8:00', '%H:%M'))
+    if td.total_seconds() < 0:
+        return '00:00'
+
+    return td_to_str(td)
 
 
 def td_to_str(td: datetime.timedelta) -> str:
