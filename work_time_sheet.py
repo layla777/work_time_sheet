@@ -45,6 +45,8 @@ def work_time_sheet(input_file):
             for row in result:
                 ws_writer.writerow(row)
 
+        return output_file
+
 
 def time_ceil(s: str) -> str:
     t = s.split(':')
@@ -98,4 +100,4 @@ if __name__ == '__main__':
     elif os.path.splitext(args[1])[1] != '.csv':
         print(args[1] + ' is not a CSV file')
     else:
-        work_time_sheet(args[1])
+        sys.stdout.write(work_time_sheet(args[1]))
