@@ -69,7 +69,13 @@ def time_floor(s: str) -> str:
 
 def working_time(s1: str, s2: str) -> str:
     t1 = datetime.datetime.strptime(s1, '%H:%M')
-    t2 = datetime.datetime.strptime(s2, '%H:%M') - datetime.timedelta(hours=1)
+    if int(s2[0:2]) > 23:
+        s2 = str(int(s2[0:2]) - 24) + s2[-3:]
+        td = datetime.timedelta(hours=24)
+    else:
+        td = datetime.timedelta(hours=0)
+
+    t2 = datetime.datetime.strptime(s2, '%H:%M') - datetime.timedelta(hours=1) + td
 
     return td_to_str(t2 - t1)
 
