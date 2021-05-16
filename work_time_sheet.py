@@ -27,6 +27,8 @@ def work_time_sheet(input_file):
                     row[6] = time_floor(row[6])
                     row[7] = working_time(row[5], row[6])
                     row[8] = overtime_work(row[7])
+                    if row[9]:
+                        row[9] = time_ceil(row[9])
 
             result.append(row)
 
