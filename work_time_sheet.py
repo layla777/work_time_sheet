@@ -10,6 +10,7 @@ STANDARD_WORK_TIME = '08:00'
 
 
 def work_time_sheet(input_file):
+    print(input_file)
     with open(input_file, newline='', encoding='utf-8-sig') as input_csv_file:
         ws_reader = csv.reader(input_csv_file, delimiter=',')
         result = []
@@ -21,7 +22,7 @@ def work_time_sheet(input_file):
                 first_loop = False
                 row[-1] = '業務内容'
             else:
-                if (not row[1]) and row[5] and row[6]:
+                if row[5] and row[6]:
                     row[-1] = 'Web ページ作成'
                     row[5] = time_ceil(row[5])
                     row[6] = time_floor(row[6])
@@ -97,15 +98,4 @@ def td_to_str(td: datetime.timedelta) -> str:
 
 
 if __name__ == '__main__':
-    args = sys.argv
-    print(args)
-    if len(args) != 2:
-        print('Argument is invalid')
-    elif not os.path.exists(args[1]):
-        print('File not found')
-    elif not os.path.isfile(args[1]):
-        print(args[1] + ' is not a file')
-    elif os.path.splitext(args[1])[1] != '.csv':
-        print(args[1] + ' is not a CSV file')
-    else:
-        sys.stdout.write(work_time_sheet(args[1]))
+    work_time_sheet('./wt.csv');
