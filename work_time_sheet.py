@@ -21,7 +21,7 @@ def work_time_sheet(input_file):
                 first_loop = False
                 row[-1] = '業務内容'
             else:
-                if (not row[1]) and row[5] and row[6]:
+                if row[5] and row[6]:
                     row[-1] = 'Web ページ作成'
                     row[5] = time_ceil(row[5])
                     row[6] = time_floor(row[6])
